@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sadegh – Nostalgic Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Source+Code+Pro:wght@400;600&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Round-Dots/Vazirmatn-RD-font-face.css">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+  <style>
+    :root {
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.3s ease-out;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Dark (night) theme – glossy, neon-ish */
+    body.dark {
+      --bg: #020310;
+      --bg-alt: #101321;
+      --card: rgba(10, 12, 28, 0.82);
+      --card-highlight: rgba(77, 91, 160, 0.55);
+      --accent: #ffd18a;
+      --accent-soft: rgba(255, 209, 138, 0.18);
+      --accent-strong: #ff7a9f;
+      --accent-glow: 0 0 22px rgba(255, 195, 120, 0.65);
+      --text: #f9f7ff;
+      --muted: #a9adc8;
+      --border: rgba(255, 255, 255, 0.12);
+      --glass-stroke: rgba(255, 255, 255, 0.18);
+      --glass-highlight: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Light (paper + glass) theme */
+    body.light {
+      --bg: #f7f0e9;
+      --bg-alt: #fdf8f2;
+      --card: rgba(255, 255, 255, 0.86);
+      --card-highlight: rgba(248, 230, 209, 0.9);
+      --accent: #f49c4b;
+      --accent-soft: rgba(244, 156, 75, 0.14);
+      --accent-strong: #ff4f81;
+      --accent-glow: 0 0 18px rgba(244, 156, 75, 0.5);
+      --text: #21140d;
+      --muted: #847266;
+      --border: rgba(0, 0, 0, 0.06);
+      --glass-stroke: rgba(255, 255, 255, 0.9);
+      --glass-highlight: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Reset */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont,
+        sans-serif;
+      background:
+        radial-gradient(circle at top left, var(--bg-alt) 0, var(--bg) 50%),
+        radial-gradient(circle at bottom right, #291b44 0, transparent 55%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    /* Noise overlay */
+    .noise-overlay {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.22;
+      mix-blend-mode: soft-light;
+      z-index: -1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0%25' y='0%25' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+      transition: opacity 0.3s ease;
+    }
+
+    /* Base typography */
+    h1,
+    h2,
+    h3 {
+      font-family: "Source Code Pro", monospace;
+    }
+
+    p {
+      margin-bottom: 0.6rem;
+    }
+
+    /* Layout */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(6, 6, 18, 0.9),
+        rgba(6, 6, 18, 0.55),
+        transparent
+      );
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    body.light .site-header {
+      background: linear-gradient(
+        to bottom,
+        rgba(247, 240, 233, 0.95),
+        rgba(247, 240, 233, 0.8),
+        transparent
+      );
+      border-bottom-color: rgba(0, 0, 0, 0.06);
+    }
+
+    .glossy-header {
+      position: relative;
+    }
+
+    .glossy-header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.35),
+        transparent 25%,
+        transparent 70%,
+        rgba(255, 255, 255, 0.12)
+      );
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .header-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-family: "Special Elite", monospace;
+      letter-spacing: 0.08em;
+      font-size: 0.98rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color var(--transition-fast), transform 0.15s ease;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+      box-shadow: var(--accent-glow);
+      transition: width var(--transition-fast);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      border-radius: 999px;
+      border: 1px solid var(--glass-stroke);
+      background: radial-gradient(circle at 30% 0, var(--glass-highlight), transparent),
+        linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(90, 95, 140, 0.9));
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.05rem;
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.7),
+        0 12px 26px rgba(0, 0, 0, 0.7),
+        var(--accent-glow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    body.light .theme-toggle {
+      background: radial-gradient(circle at 30% 0, var(--glass-highlight), transparent),
+        linear-gradient(135deg, #ffffff, #f5e3d2);
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.5),
+        0 18px 36px rgba(0, 0, 0, 0.75),
+        var(--accent-glow);
+    }
+
+    /* Lang switch */
+    .lang-switch {
+      display: inline-flex;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.06), transparent);
+    }
+
+    body.light .lang-switch {
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.9), transparent);
+    }
+
+    .lang-btn {
+      font-size: 0.78rem;
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+      min-width: 64px;
+    }
+
+    .lang-btn.active {
+      background: radial-gradient(circle at 10% 0, #fffbe7, var(--accent));
+      color: #24150a;
+      transform: translateY(-0.5px);
+    }
+
+    /* Main layout */
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .section {
+      margin-top: 48px;
+    }
+
+    .section.hero {
+      margin-top: 32px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      color: var(--accent);
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .section-subtitle {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    /* Cards */
+    .card {
+      position: relative;
+      padding: 20px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.08), transparent),
+        linear-gradient(145deg, var(--card), var(--card-highlight));
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      transition:
+        transform 0.22s ease-out,
+        box-shadow 0.22s ease-out,
+        border-color 0.22s ease-out,
+        background 0.22s ease-out;
+    }
+
+    .card.glossy::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(
+          circle at 10% 0,
+          rgba(255, 255, 255, 0.35),
+          transparent 55%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.18),
+          transparent 40%
+        );
+      mix-blend-mode: screen;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: calc(var(--radius-xl) - 1px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Hero specific tweaks */
+    .hero-window {
+      margin-top: 16px;
+      padding: 22px 22px 20px;
+    }
+
+    .hero-window .window-body {
+      padding-top: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section.hero .hero-window {
+      border-radius: 26px;
+      min-height: 200px;
+    }
+
+    .section.hero .hero-window.glossy::before {
+      opacity: 0.6;
+    }
+
+    /* Window bar */
+    .window-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.25), transparent),
+        linear-gradient(90deg, rgba(10, 10, 20, 0.8), rgba(40, 40, 70, 0.8));
+      margin-bottom: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    body.light .window-bar {
+      background: radial-gradient(
+          circle at 0 0,
+          rgba(255, 255, 255, 0.8),
+          transparent
+        ),
+        linear-gradient(90deg, #ffffff, #f1e2d3);
+    }
+
+    .window-title {
+      font-family: "Source Code Pro", monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+
+    /* Hero content */
+    .hero-title {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      min-height: 1.4em;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 580px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 0.9rem;
+    }
+
+    .hero-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Buttons */
+    .btn {
+      position: relative;
+      font-size: 0.86rem;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .btn.primary {
+      background: radial-gradient(circle at 0 0, #fffbe7, var(--accent));
+      color: #27140b;
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.55),
+        var(--accent-glow);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.65),
+        var(--accent-glow);
+    }
+
+    .btn.ghost {
+      border-color: rgba(255, 255, 255, 0.25);
+      color: var(--text);
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    body.light .btn.ghost {
+      border-color: rgba(0, 0, 0, 0.08);
+      background: radial-gradient(circle at 0 0, #ffffff, transparent);
+    }
+
+    .btn.ghost:hover {
+      transform: translateY(-1px);
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.5), transparent);
+    }
+
+    .glossy-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.25),
+        transparent 55%
+      );
+      opacity: 0.45;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    /* Typewriter */
+    .typewriter {
+      border-right: 2px solid var(--accent);
+      padding-right: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    /* Simple other sections just to see layout */
+    .card-title {
+      font-size: 0.98rem;
+      margin-bottom: 8px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .about-list {
+      list-style: none;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .about-list li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .about-list span:first-child {
+      color: var(--muted);
+      margin-right: 10px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .project-card {
+      padding: 16px;
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .project-tech {
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .site-footer {
+      margin-top: 40px;
+      font-size: 0.78rem;
+      text-align: center;
+      color: var(--muted);
+      opacity: 0.85;
+    }
+
+    /* RTL */
+    .rtl {
+      direction: rtl;
+    }
+
+    .rtl .about-list li {
+      flex-direction: row-reverse;
+    }
+
+    .rtl .about-list span:first-child {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .projects-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-meta {
+        flex-direction: column;
+      }
+
+      main {
+        padding: 24px 14px 40px;
+      }
+    }
+  </style>
+</head>
+<body class="light">
+  <div class="noise-overlay"></div>
+
+  <!-- HEADER -->
+  <header class="site-header glossy-header">
+    <div class="header-inner">
+      <div class="brand">SADEGH SARANI</div>
+      <div class="header-right">
+        <nav class="nav">
+          <a href="#top" data-i18n="nav.home"></a>
+          <a href="#about" data-i18n="nav.about"></a>
+          <a href="#projects" data-i18n="nav.projects"></a>
+          <a href="#contact" data-i18n="nav.contact"></a>
+        </nav>
+        <div class="header-controls">
+          <div class="lang-switch">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="fa">FA</button>
+          </div>
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            ☾
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HERO -->
+    <section class="section hero" id="top">
+      <div class="hero-window card glossy">
+        <div class="window-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="window-title" data-i18n="hero.fileTitle"></span>
+        </div>
+        <div class="window-body">
+          <h1 class="hero-title">
+            <span class="typewriter" id="typewriter"></span>
+          </h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
+
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="meta-label" data-i18n="hero.experienceLabel"></span>
+              <span class="meta-value" data-i18n="hero.experienceValue"></span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label" data-i18n="hero.stackLabel"></span>
+              <span class="meta-value" data-i18n="hero.stackValue"></span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label" data-i18n="hero.locationLabel"></span>
+              <span class="meta-value" data-i18n="hero.locationValue"></span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn primary glossy-btn" data-i18n="hero.btnProjects"></a>
+            <a href="#contact" class="btn ghost glossy-btn" data-i18n="hero.btnContact"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="about.title"></h2>
+        <p class="section-subtitle" data-i18n="about.subtitle"></p>
+      </div>
+
+      <div class="about-grid">
+        <div class="card glossy">
+          <h3 class="card-title" data-i18n="about.profileTitle"></h3>
+          <p data-i18n="about.profileBody"></p>
+        </div>
+        <div class="card glossy">
+          <h3 class="card-title" data-i18n="about.detailsTitle"></h3>
+          <ul class="about-list">
+            <li>
+              <span data-i18n="about.detailRoleLabel"></span>
+              <span data-i18n="about.detailRoleValue"></span>
+            </li>
+            <li>
+              <span data-i18n="about.detailExperienceLabel"></span>
+              <span data-i18n="about.detailExperienceValue"></span>
+            </li>
+            <li>
+              <span data-i18n="about.detailStatusLabel"></span>
+              <span data-i18n="about.detailStatusValue"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="projects.title"></h2>
+        <p class="section-subtitle" data-i18n="projects.subtitle"></p>
+      </div>
+      <div class="projects-grid">
+        <article class="card glossy project-card">
+          <div class="window-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="window-title" data-i18n="projects.p1.windowTitle"></span>
+          </div>
+          <h3 class="project-title" data-i18n="projects.p1.title"></h3>
+          <p class="project-desc" data-i18n="projects.p1.desc"></p>
+          <p class="project-tech" data-i18n="projects.p1.tech"></p>
+        </article>
+
+        <article class="card glossy project-card">
+          <div class="window-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="window-title" data-i18n="projects.p2.windowTitle"></span>
+          </div>
+          <h3 class="project-title" data-i18n="projects.p2.title"></h3>
+          <p class="project-desc" data-i18n="projects.p2.desc"></p>
+          <p class="project-tech" data-i18n="projects.p2.tech"></p>
+        </article>
+
+        <article class="card glossy project-card">
+          <div class="window-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="window-title" data-i18n="projects.p3.windowTitle"></span>
+          </div>
+          <h3 class="project-title" data-i18n="projects.p3.title"></h3>
+          <p class="project-desc" data-i18n="projects.p3.desc"></p>
+          <p class="project-tech" data-i18n="projects.p3.tech"></p>
+        </article>
+          <article class="card glossy project-card">
+              <div class="window-bar">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                  <span class="window-title" data-i18n="projects.p4.windowTitle"></span>
+              </div>
+              <h3 class="project-title" data-i18n="projects.p4.title"></h3>
+              <p class="project-desc" data-i18n="projects.p4.desc"></p>
+              <p class="project-tech" data-i18n="projects.p4.tech"></p>
+          </article>
+          <article class="card glossy project-card">
+              <div class="window-bar">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                  <span class="window-title" data-i18n="projects.p5.windowTitle"></span>
+              </div>
+              <h3 class="project-title" data-i18n="projects.p5.title"></h3>
+              <p class="project-desc" data-i18n="projects.p5.desc"></p>
+              <p class="project-tech" data-i18n="projects.p5.tech"></p>
+          </article>
+          <article class="card glossy project-card">
+              <div class="window-bar">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                  <span class="window-title" data-i18n="projects.p6.windowTitle"></span>
+              </div>
+              <h3 class="project-title" data-i18n="projects.p6.title"></h3>
+              <p class="project-desc" data-i18n="projects.p6.desc"></p>
+              <p class="project-tech" data-i18n="projects.p6.tech"></p>
+          </article>
+      </div>
+    </section>
+
+      <!-- EXPERIENCE & LEARNING -->
+      <section class="section" id="experience">
+          <div class="section-header">
+              <h2 class="section-title" data-i18n="experience.title"></h2>
+              <p class="section-subtitle" data-i18n="experience.subtitle"></p>
+          </div>
+
+          <div class="about-grid">
+              <!-- Professional experience -->
+              <div class="card glossy">
+                  <h3 class="card-title" data-i18n="experience.professionalTitle"></h3>
+                  <div class="timeline">
+                      <div class="timeline-item">
+                          <div class="timeline-title" data-i18n="experience.items.irans.title"></div>
+                          <div class="timeline-meta" data-i18n="experience.items.irans.meta"></div>
+                          <p class="timeline-desc" data-i18n="experience.items.irans.desc"></p>
+                          <div class="chip-row">
+                              <span class="chip" data-i18n="experience.items.irans.chip1"></span>
+                              <span class="chip" data-i18n="experience.items.irans.chip2"></span>
+                              <span class="chip" data-i18n="experience.items.irans.chip3"></span>
+                          </div>
+                      </div>
+
+                      <div class="timeline-item">
+                          <div class="timeline-title" data-i18n="experience.items.limoo.title"></div>
+                          <div class="timeline-meta" data-i18n="experience.items.limoo.meta"></div>
+                          <p class="timeline-desc" data-i18n="experience.items.limoo.desc"></p>
+                          <div class="chip-row">
+                              <span class="chip" data-i18n="experience.items.limoo.chip1"></span>
+                              <span class="chip" data-i18n="experience.items.limoo.chip2"></span>
+                              <span class="chip" data-i18n="experience.items.limoo.chip3"></span>
+                          </div>
+                      </div>
+
+                      <div class="timeline-item">
+                          <div class="timeline-title" data-i18n="experience.items.freelance.title"></div>
+                          <div class="timeline-meta" data-i18n="experience.items.freelance.meta"></div>
+                          <p class="timeline-desc" data-i18n="experience.items.freelance.desc"></p>
+                          <div class="chip-row">
+                              <span class="chip" data-i18n="experience.items.freelance.chip1"></span>
+                              <span class="chip" data-i18n="experience.items.freelance.chip2"></span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Learning & Education -->
+              <div class="card glossy">
+                  <h3 class="card-title" data-i18n="experience.learningTitle"></h3>
+                  <p data-i18n="experience.learningIntro"></p>
+
+                  <div class="timeline">
+                      <div class="timeline-item">
+                          <div class="timeline-title" data-i18n="experience.learning.python.title"></div>
+                          <div class="timeline-meta" data-i18n="experience.learning.python.meta"></div>
+                          <p class="timeline-desc" data-i18n="experience.learning.python.desc"></p>
+                          <div class="chip-row">
+                              <span class="chip">Python</span>
+                              <span class="chip">APIs</span>
+                              <span class="chip">Scripting</span>
+                          </div>
+                      </div>
+
+                      <div class="timeline-item">
+                          <div class="timeline-title" data-i18n="experience.learning.react.title"></div>
+                          <div class="timeline-meta" data-i18n="experience.learning.react.meta"></div>
+                          <p class="timeline-desc" data-i18n="experience.learning.react.desc"></p>
+                          <div class="chip-row">
+                              <span class="chip">React</span>
+                              <span class="chip">Next.js</span>
+                              <span class="chip">TypeScript</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+
+      <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="contact.title"></h2>
+        <p class="section-subtitle" data-i18n="contact.subtitle"></p>
+      </div>
+      <div class="card glossy">
+        <h3 class="card-title" data-i18n="contact.cardTitle"></h3>
+        <p><strong>Email:</strong> <span data-i18n="contact.email"></span></p>
+        <p><strong>GitHub:</strong> <span data-i18n="contact.github"></span></p>
+        <p><strong>LinkedIn:</strong> <span data-i18n="contact.linkedin"></span></p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span data-i18n="footer.text"></span>
+    </footer>
+  </main>
+
+  <script>
+    // Simple translations (EN + FA)
+    const translations = {
+      en: {
+        nav: {
+          home: "Home",
+          about: "About",
+          projects: "Projects",
+          contact: "Contact"
+        },
+        hero: {
+          fileTitle: "resume_sadegh_legacy.txt",
+          typewriter: "FullStack Developer • ",
+          subtitle: "Developer with 6 years of experience in PHP, Laravel, microservices and hosting platforms.",
+          experienceLabel: "Experience",
+          experienceValue: "5+ years",
+          stackLabel: "Tech Stack",
+          stackValue: "PHP · Laravel · Vue · Microservices · Docker · MySQL . Nest . Next",
+          locationLabel: "Location",
+          locationValue: "Mashhad, Iran (Remote-ready)",
+          btnProjects: "View Projects",
+          btnContact: "Contact Me"
+        },
+        about: {
+          title: "About",
+          subtitle: "A quick snapshot of who I am and what I love to build.",
+          profileTitle: "Profile",
+          profileBody: "I’m Sadegh, a backend web developer with extensive experience in cloud infrastructure, hosting solutions, and WHMCS. I specialize in building robust APIs, designing scalable backend systems, and implementing clean, maintainable business logic. I enjoy solving complex problems, optimizing performance, and creating systems that are both reliable and efficient.",
+          detailsTitle: "Details",
+          detailRoleLabel: "Role",
+          detailRoleValue: "Backend / Full-stack Developer",
+          detailExperienceLabel: "Experience",
+          detailExperienceValue: "Since 2019",
+          detailStatusLabel: "Status",
+          detailStatusValue: "Open to interesting remote work & collaborations"
+        },
+        projects: {
+          title: "Projects",
+          subtitle: "Selected work that reflects my experience and style.",
+          p1: {
+            windowTitle: "aratick",
+            title: "Aratick – Medical Appointment Platform",
+            desc: "Co-founded and developed a production-ready appointment system for Sarem Hospital, focusing on reliability, clean booking flows and integration with existing infrastructure.",
+            tech: "Laravel · MySQL · REST API · Hosting . Livewire . Docker"
+          },
+          p2: {
+            windowTitle: "cloud_panel.irserver",
+            title: "Cloud & Hosting Integrations",
+            desc: "Worked custom panels to integrate cloud services, billing and automation—improving stability and reducing manual operations.",
+            tech: "PHP · WHMCS · Microservices · Docker . Mysql . RabbitMq . Jeager . Sentry"
+          },
+          p3: {
+            windowTitle: "limoohost",
+            title: "Hosting",
+            desc: "Development of a hosting platform, cloud services, and domain management.",
+            tech: "WHMCS · PHP · Mysql · Jira · Agile"
+          },
+          p4: {
+              windowTitle: "telegram robot ai",
+              title: "Project Healthy For Personals",
+              desc: "A smart Telegram bot that provides personalized diet plans using AI. Users receive tailored meal recommendations and guidance based on their goals, preferences, and activity levels.",
+              tech: "Laravel · Laragram . Mysql . Docker"
+          },
+          p5: {
+              windowTitle: "boometo panel",
+              title: "Ai Generate And Edit Image With Ai",
+              desc: "A web platform that leverages AI to generate and edit images effortlessly. Users can create custom visuals, enhance photos, and apply creative edits using advanced AI tools.",
+              tech: "Laravel · Next . Mysql . Docker "
+          },
+          p6: {
+             windowTitle: "iransServer",
+             title: "Hosting",
+             desc: "Development of a hosting platform, cloud services, and domain management.",
+             tech: "WHMCS · PHP · Mysql · Jira · Agile"
+          }
+        },
+        contact: {
+          title: "Contact",
+          subtitle: "Like the vibe? Let’s talk.",
+          cardTitle: "Let’s build something cool",
+          email: "sadeghsaraniwork@gmail.com",
+          github: "https://github.com/SadeghSarani",
+          linkedin: "www.linkedin.com/in/sadegh-sarani-14b964269"
+        },
+        footer: {
+          text: "© " + new Date().getFullYear() + " Sadegh – Nostalgic Resume UI"
+        },
+          experience: {
+              title: "Experience & Learning",
+              subtitle: "Where I’ve worked – and what I’m currently learning.",
+              professionalTitle: "Professional Experience",
+              learningTitle: "Learning & Education",
+              learningIntro: "Besides my professional Laravel and PHP work, I’m actively learning tools that I haven’t used in production yet.",
+
+              items: {
+                  irans: {
+                      title: "Backend Developer – IransServer Cloud",
+                      meta: "2021 – 2023 · Full-time",
+                      desc: "Worked on cloud and hosting platforms using microservices, TDD, Docker and WHMCS integrations.",
+                      chip1: "Microservices",
+                      chip2: "Laravel · PHP",
+                      chip3: "WHMCS"
+                  },
+                  limoo: {
+                      title: "Backend Developer – LimoHost",
+                      meta: "2023 – Present · Full-time",
+                      desc: "Building hosting automation, billing flows and integrations with domain and server providers.",
+                      chip1: "Laravel · PHP",
+                      chip2: "Vue · WHMCS",
+                      chip3: "Agile · Jira"
+                  },
+                  freelance: {
+                      title: "Freelance Web Developer",
+                      meta: "2019 – Present · Remote",
+                      desc: "Delivering custom web applications, APIs and automation scripts for clients in different industries.",
+                      chip1: "REST APIs",
+                      chip2: "Custom web apps"
+                  }
+              },
+
+              learning: {
+                  python: {
+                      title: "Python – Backend & Automation (Learning)",
+                      meta: "Self-study · In progress",
+                      desc: "Exploring Python for scripting, APIs and automation. No production projects yet, but I’m building small tools and experimenting with best practices."
+                  },
+                  react: {
+                      title: "React & Next.js (Learning)",
+                      meta: "Self-study · In progress",
+                      desc: "Learning React and Next.js for modern frontend development. So far I’ve followed courses and built small demo apps, but I don’t count this as production experience yet."
+                  }
+              }
+          }
+      },
+      fa: {
+        nav: {
+          home: "خانه",
+          about: "درباره من",
+          projects: "پروژه‌ها",
+          contact: "تماس"
+        },
+        hero: {
+          fileTitle: "resume_sadegh_legacy.txt",
+          typewriter: "توسعه‌دهنده فول استک",
+          subtitle: "توسعه‌دهنده با ۶ سال سابقه در PHP، Laravel، میکروسرویس‌ها و پلتفرم‌های هاستینگ.",
+          experienceLabel: "سابقه",
+          experienceValue: "بیش از ۵ سال",
+          stackLabel: "استک",
+          stackValue: "PHP · Laravel · Vue · Microservices · Docker · MySQL",
+          locationLabel: "موقعیت",
+          locationValue: "مشهد، ایران (آماده ریموت)",
+          btnProjects: "مشاهده پروژه‌ها",
+          btnContact: "ارتباط با من"
+        },
+        about: {
+          title: "درباره من",
+          subtitle: "درباره من.",
+          profileTitle: "پروفایل",
+          profileBody: "من صادق هستم، یک توسعه‌دهنده وب بک‌اند با تجربه گسترده در زیرساخت ابری، راهکارهای میزبانی وب و WHMCS. من در ساخت APIهای قوی، طراحی سیستم‌های بک‌اند مقیاس‌پذیر و پیاده‌سازی منطق کسب‌وکار تمیز و قابل نگهداری تخصص دارم. من از حل مشکلات پیچیده، بهینه‌سازی عملکرد و ایجاد سیستم‌هایی که هم قابل اعتماد و هم کارآمد باشند، لذت می‌برم.",
+          detailsTitle: "جزئیات",
+          detailRoleLabel: "نقش",
+          detailRoleValue: "توسعه‌دهنده بک‌اند / فول‌استک",
+          detailExperienceLabel: "سابقه",
+          detailExperienceValue: "از ۲۰۱۹",
+          detailStatusLabel: "وضعیت",
+          detailStatusValue: "آماده همکاری و پروژه‌های ریموت جذاب"
+        },
+        projects: {
+          title: "پروژه‌ها",
+          subtitle: "چند نمونه کار که تجربه و سبک من را نشان می‌دهد.",
+          p1: {
+            windowTitle: "med_appointment_aratick.log",
+            title: "Aratick – سامانه نوبت‌دهی پزشکی",
+            desc: "هم‌بنیان‌گذار و توسعه‌دهنده سامانه نوبت‌دهی برای بیمارستان صارم با تمرکز روی پایداری، فرآیند رزرو روان و یکپارچه‌سازی با زیرساخت فعلی.",
+            tech: "Laravel · MySQL · REST API · Hosting"
+          },
+          p2: {
+            windowTitle: "cloud_panel.irserver.cfg",
+            title: "یکپارچه‌سازی سرویس‌های کلود و هاست",
+            desc: "کار روی  پنل‌های اختصاصی برای یکپارچه‌سازی سرویس‌های ابری، صورتحساب و اتوماسیون؛ با هدف کاهش خطای انسانی و افزایش پایداری.",
+            tech: "PHP · WHMCS · Microservices · Docker"
+          },
+            p3: {
+                windowTitle: "لیموهاست",
+                title: "هاستینگ",
+                desc: "توسعه پلتفرم هاستینگ، خدمات ابری و مدیریت دامنه.",
+                tech: "WHMCS · PHP · Mysql · Jira · Agile"
+            },
+          p4: {
+             windowTitle: "ربات تلگرام  رژیم  هوش مصنوعی",
+             title: "پروژه Healthy For Personals",
+             desc: "یک ربات هوشمند تلگرام که برنامه‌های غذایی شخصی‌سازی شده با استفاده از هوش مصنوعی ارائه می‌دهد. کاربران بر اساس اهداف، ترجیحات و سطح فعالیت خود، توصیه‌های غذایی مناسب دریافت می‌کنند.",
+             tech: "Laravel · Laragram · Mysql · Docker"
+          },
+          p5: {
+              windowTitle: "پنل Boometo",
+              title: "تولید و ویرایش تصویر با هوش مصنوعی",
+              desc: "یک پلتفرم وب که با استفاده از هوش مصنوعی به کاربران امکان می‌دهد تصاویر را به‌سادگی تولید و ویرایش کنند. کاربران می‌توانند تصاویر سفارشی ایجاد کنند، عکس‌ها را بهبود دهند و تغییرات خلاقانه اعمال کنند.",
+              tech: "Laravel · Next · Mysql · Docker"
+          },
+          p6: {
+             windowTitle: "ایرانسرور",
+             title: "هاستینگ",
+             desc: "توسعه پلتفرم هاستینگ و خدمات ابری و دامنه.",
+             tech: "WHMCS · PHP · Mysql · Jira . Agile"
+          }
+        },
+        contact: {
+          title: "تماس",
+          subtitle: "اگر از این فضا خوشت آمد، در ارتباط باشیم.",
+          cardTitle: "بیایید چیزی جذاب بسازیم",
+            email: "sadeghsaraniwork@gmail.com",
+            github: "https://github.com/SadeghSarani",
+            linkedin: "www.linkedin.com/in/sadegh-sarani-14b964269"
+        },
+        footer: {
+          text: "© " + new Date().getFullYear() + " صادق سارانی"
+        },
+          experience: {
+              title: "تجربه کاری و یادگیری",
+              subtitle: "جایی که کار کرده‌ام و چیزهایی که الان در حال یادگیری هستم.",
+              professionalTitle: "تجربه کاری",
+              learningTitle: "یادگیری و آموزش",
+              learningIntro: "علاوه بر کار حرفه‌ای با Laravel و PHP، روی تکنولوژی‌هایی کار می‌کنم که فعلاً در پروژه‌های واقعی استفاده نکرده‌ام.",
+
+              items: {
+                  irans: {
+                      title: "توسعه‌دهنده بک‌اند – ایران‌سرور کلود",
+                      meta: "۲۰۲۱ – ۲۰۲۳ · تمام‌وقت",
+                      desc: "کار روی پلتفرم‌های کلود و هاستینگ با معماری مایکروسرویس، TDD، Docker و یکپارچه‌سازی با WHMCS.",
+                      chip1: "Microservices",
+                      chip2: "Laravel · PHP",
+                      chip3: "WHMCS"
+                  },
+                  limoo: {
+                      title: "توسعه‌دهنده بک‌اند – لیموهاست",
+                      meta: "۲۰۲۳ – اکنون · تمام‌وقت",
+                      desc: "توسعه اتوماسیون هاستینگ، فرآیندهای صورتحساب و یکپارچه‌سازی با سرویس‌دهنده‌های دامنه و سرور.",
+                      chip1: "Laravel · PHP",
+                      chip2: "Vue · WHMCS",
+                      chip3: "Agile · Jira"
+                  },
+                  freelance: {
+                      title: "توسعه‌دهنده وب فریلنس",
+                      meta: "۲۰۱۹ – اکنون · ریموت",
+                      desc: "پیاده‌سازی اپلیکیشن‌های وب سفارشی، APIها و اسکریپت‌های اتوماسیون برای مشتریان در حوزه‌های مختلف.",
+                      chip1: "REST API",
+                      chip2: "Web Apps"
+                  }
+              },
+
+              learning: {
+                  python: {
+                      title: "پایتون – بک‌اند و اتوماسیون (در حال یادگیری)",
+                      meta: "مطالعه شخصی · در حال انجام",
+                      desc: "در حال یادگیری پایتون برای اسکریپت‌نویسی، API و اتوماسیون هستم. هنوز روی پروژه‌های واقعی استفاده نشده، اما روی ابزارهای کوچک و تمرین بهترین الگوها کار می‌کنم."
+                  },
+                  react: {
+                      title: "React و Next.js (در حال یادگیری)",
+                      meta: "مطالعه شخصی · در حال انجام",
+                      desc: "در حال یادگیری React و Next.js برای توسعه فرانت‌اند مدرن هستم. فعلاً دوره و دموهای کوچک ساخته‌ام ولی این را تجربه تولیدی حساب نمی‌کنم."
+                  }
+              }
+          }
+
+      }
+    };
+
+    // i18n apply function
+    let currentLang = "en";
+
+    function applyTranslations(lang) {
+      currentLang = lang;
+      const dict = translations[lang];
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const keys = el.getAttribute("data-i18n").split(".");
+        let value = dict;
+        keys.forEach(k => value = value && value[k]);
+        if (typeof value === "string") {
+          el.textContent = value;
+        }
+      });
+
+      // typewriter text
+      typewriterText = dict.hero.typewriter || "";
+      restartTypewriter();
+
+      // direction for Persian
+      if (lang === "fa") {
+        document.body.classList.add("rtl");
+      } else {
+        document.body.classList.remove("rtl");
+      }
+    }
+
+    // Theme toggle
+    const themeToggle = document.getElementById("themeToggle");
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      if (isDark) {
+        document.body.classList.remove("light");
+        themeToggle.textContent = "☀";
+      } else {
+        document.body.classList.add("light");
+        themeToggle.textContent = "☾";
+      }
+    });
+
+    // Lang buttons
+    const langButtons = document.querySelectorAll(".lang-btn");
+    langButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = btn.getAttribute("data-lang");
+        langButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        applyTranslations(lang);
+      });
+    });
+
+    // Typewriter effect
+    const typewriterEl = document.getElementById("typewriter");
+    let typewriterIndex = 0;
+    let typewriterText = "";
+
+    function typeWriterStep() {
+      if (!typewriterText) return;
+      typewriterEl.textContent = typewriterText.slice(0, typewriterIndex);
+      typewriterIndex++;
+      if (typewriterIndex <= typewriterText.length) {
+        setTimeout(typeWriterStep, 70);
+      }
+    }
+
+    function restartTypewriter() {
+      typewriterIndex = 0;
+      typewriterEl.textContent = "";
+      setTimeout(typeWriterStep, 200);
+    }
+
+    applyTranslations("en");
+  </script>
+</body>
